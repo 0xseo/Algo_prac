@@ -1,21 +1,17 @@
 from collections import deque
 def solution(cards1, cards2, goal):
-    c1 = deque(cards1)
-    c2 = deque(cards2)
+    answer = 'Yes'
     
-    for word in goal:
-        if c1:
-            word1 = c1[0]
-        else: 
-            word1 = ""
-        if c2:
-            word2 = c2[0]
+    q1 = deque(cards1)
+    q2 = deque(cards2)
+    res = []
+    for i, word in enumerate(goal):
+        if q1 and word == q1[0]:
+            res.append(q1[0])
+            q1.popleft()
+        elif q2 and word == q2[0]:
+            res.append(q2[0])
+            q2.popleft()
         else:
-            word2 = ""
-        if word1 != word and word2 != word:
-            return "No"
-        elif word1 == word:
-            c1.popleft()
-        elif word2 == word:
-            c2.popleft()
-    return "Yes"
+            answer = 'No'
+    return answer
