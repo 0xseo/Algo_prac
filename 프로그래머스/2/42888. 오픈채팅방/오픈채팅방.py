@@ -1,17 +1,20 @@
 def solution(record):
-    members = {}
-    for rec in record:
-        code = rec.split()[0]
-        uid = rec.split()[1]
-        if code != "Leave":
-            members[uid] = rec.split()[2]
-    
+    user = {}
     answer = []
+    pr = {"Enter" : "님이 들어왔습니다.", "Leave": "님이 나갔습니다."}
+    
     for rec in record:
-        code = rec.split()[0]
-        uid = rec.split()[1]
-        if code == "Enter":
-            answer.append(members[uid] + "님이 들어왔습니다.")
-        elif code == "Leave":
-            answer.append(members[uid] + "님이 나갔습니다.")
+        if 'Leave' in rec:
+            continue
+        cmd = rec.split()
+        user[cmd[1]] = cmd[2]
+    # print(user)
+        
+    for rec in record:
+        if 'Change' in rec:
+            continue
+        answer.append(user[rec.split()[1]] + pr[rec.split()[0]])
+        
     return answer
+    
+    
