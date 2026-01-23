@@ -1,53 +1,60 @@
 from collections import deque
 def solution(maps):
-    def dfs(start, end, maps):
-        
-        q = deque()
-    
-        dirx = [-1, 1, 0, 0]
-        diry = [0, 0, -1, 1]
-        R = len(maps)
-        C = len(maps[0])
-        d = [[-1] * C for _ in range(R)]
-        d[start[0]][start[1]] = 0
+    def bfs(start, end):
+        inf = 9e9
 
-        q.append(((start[0], start[1]), 0))
+        sy = start[0]
+        sx = start[1]
+        ey = end[0]
+        ex = end[1]
+
+        dy = [1, -1, 0, 0]
+        dx = [0, 0, 1, -1]
+
+        visited = [[inf] * m for i in range(n)]
+
+        q = deque([(sy, sx, 0)])
 
         while q:
-            item = q.popleft()
-            y = item[0][0]
-            x = item[0][1]
-            time = item[1]
+            # print(q)
+            y, x, cost = q.popleft()
 
-            if x == end[1] and y == end[0]:
-                continue
-
+            if y == ey and x == ex:
+                # print(cost)
+                return cost
+            
+            
             for i in range(4):
-                nx = x + dirx[i]
-                ny = y + diry[i]
-                if nx >= 0 and nx < C and ny >= 0 and ny < R:
-                    if maps[ny][nx] != "X":
-                        if d[ny][nx] == -1 or d[ny][nx] > time+1:
-                            d[ny][nx] = time+1
-                            q.append(((ny, nx), time+1))
-        return d[end[0]][end[1]]
-    for y, rows in enumerate(maps):
-        for x, cell in enumerate(rows):
-            if cell == "S":
-                start = (y, x)
-            elif cell == "L":
-                lever = (y, x)
-            elif cell == "E":
-                end = (y, x)
-        
-    startToLever = dfs(start, lever, maps)
-    if startToLever == -1:
+                ny = y + dy[i]
+                nx = x + dx[i]
+                if 0 <= ny < n and 0 <= nx < m:
+                    if maps[ny][nx] != 'X':
+                        if visited[ny][nx] > cost + 1:
+                            visited[ny][nx] = cost + 1
+                            q.append((ny, nx, cost + 1))
+        # print('bfs', cost)
         return -1
-    leverToEnd = dfs(lever, end, maps)
-    if leverToEnd == -1:
-        return -1
-    return startToLever + leverToEnd
-                    
-                    
 
+    n = len(maps)
+    m = len(maps[0])
+    S = (0, 0)
+    L = (0, 0)
+    E = (0, 0)
+    
+    for i, string in enumerate(maps):
+        if "S" in string:
+            S = (i, string.index("S"))
+        if "L" in string:
+            L = (i, string.index("L"))
+        if "E" in string:
+            E = (i, string.index("E"))
+    
+    a = bfs(S, L)
+    b = bfs(L, E)
+    if a != -1 and b != -1:
+        return a + b
+    return -1
+                    
+                   
+    
     
