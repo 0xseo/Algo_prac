@@ -7,8 +7,6 @@ def solution(n, computers):
             return a
         parents[a] = find(parents[a])
         return parents[a]
-    
-    stack = [0]
                     
     parents = [i for i in range(n)]
     
