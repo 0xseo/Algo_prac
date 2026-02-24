@@ -6,7 +6,6 @@ def solution(board):
     
     dy = [1, -1, 0, 0]
     dx = [0, 0, 1, -1]
-    direc = ['d', 'u', 'r', 'l']
     
     q = deque()
     q.append((0, 0, -500, ''))
