@@ -1,18 +1,14 @@
 def solution(strs, t):
-    sizes = set([len(str) for str in strs])
-    inf = 9e9
-    dp = [inf] * (len(t)+1)
+    n = len(t)
+    
+    dp = [float("inf")] * (n+1)
     dp[0] = 0
     
-    for i in range(1, len(t)+1):
-        word = t[:i]
-        for s in sizes:
-            if s > i:
-                continue
-            if word[i-s:] in strs:
-                dp[i] = min(dp[i], dp[i-s] + 1)
-    if dp[-1] != inf:
-        return dp[-1]
+    sizes = set(len(s) for s in strs)
     
-    return -1
+    for i in range(1, n+1):
+        for size in sizes:
+            if size <= i and t[i-size:i] in strs:
+                dp[i] = min(dp[i], dp[i-size]+1)
+    return -1 if dp[-1] == float("inf") else dp[-1]
                 
