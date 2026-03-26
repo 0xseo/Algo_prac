@@ -7,6 +7,7 @@
 | 문제번호 | 링크 |
 | ----- | ----- |
 |1000. A＋B|[링크](./%EB%B0%B1%EC%A4%80/Bronze/1000.%E2%80%85A%EF%BC%8BB/README.md)|
+|11382. 꼬마 정민|[링크](./%EB%B0%B1%EC%A4%80/Bronze/11382.%E2%80%85%EA%BC%AC%EB%A7%88%E2%80%85%EC%A0%95%EB%AF%BC/README.md)|
 |2480. 주사위 세개|[링크](./%EB%B0%B1%EC%A4%80/Bronze/2480.%E2%80%85%EC%A3%BC%EC%82%AC%EC%9C%84%E2%80%85%EC%84%B8%EA%B0%9C/%EC%A3%BC%EC%82%AC%EC%9C%84%E2%80%85%EC%84%B8%EA%B0%9C.java)|
 ### 🚀 Gold
 | 문제번호 | 링크 |
