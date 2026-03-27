@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import re
 from urllib import parse
 
 HEADER="""# 
@@ -8,6 +9,21 @@ HEADER="""#
 
 
 """
+BOJ_RANK = {
+    'Bronze': 1,
+    'Silver': 2,
+    'Gold': 3,
+    'Platinum': 4,
+    'Diamond': 5,
+    'Ruby': 6
+}
+def sort_key(name):
+    if name in BOJ_RANK:
+        return (0, BOJ_RANK[name])
+    nums = re.findall(r'\d+', name)
+    if nums:
+        return (1, int(nums[0]))
+    return (2, name)
 
 def main():
     content = ""
@@ -16,8 +32,9 @@ def main():
     directories = [];
     solveds = [];
 
+
     for root, dirs, files in os.walk("."):
-        dirs.sort()
+        dirs.sort(key=sort_key)
         if root == '.':
             for dir in ('.git', '.github'):
                 try:
