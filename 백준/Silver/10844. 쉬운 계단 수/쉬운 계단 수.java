@@ -19,7 +19,7 @@ public class Main {
         } else if (lastNum == 9) {
           dp[len][lastNum] = dp[len-1][8] % 1000000000;
         } else {
-          dp[len][lastNum] = dp[len-1][lastNum-1] + dp[len-1][lastNum+1] % 1000000000;
+          dp[len][lastNum] = (dp[len-1][lastNum-1] + dp[len-1][lastNum+1]) % 1000000000;
         }
       }
     }
